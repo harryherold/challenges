@@ -4,3 +4,6 @@
 **venv
 **config.py
 **.cache
+02/.vscode/launch.json
+02/.vscode/settings.json
+02/.vscode/tags
