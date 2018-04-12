@@ -1,4 +1,5 @@
 import xml.etree.ElementTree as ET
+from collections import Counter
 
 TOP_NUMBER = 10
 RSS_FEED = 'rss.xml'
@@ -16,7 +17,7 @@ def get_tags() -> list:
 
 def get_top_tags(tags):
     """Get the TOP_NUMBER of most common tags"""
-    pass
+    return Counter(tags).most_common(TOP_NUMBER)
 
 
 def get_similarities(tags):
