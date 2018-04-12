@@ -3,19 +3,14 @@ import xml.etree.ElementTree as ET
 TOP_NUMBER = 10
 RSS_FEED = 'rss.xml'
 SIMILAR = 0.87
+REPLACE_CHARS = str.maketrans('-', ' ')
 
-
-def get_tags() -> set:
+def get_tags() -> list:
     """Find all tags in RSS_FEED.
     Replace dash with whitespace."""
     tree = ET.parse('rss.xml')
     root = tree.getroot()
-    l = []
-    # for tag in root.iter('category'):
-    #     l.append(tag.text.replace('-', ' '))
-    # print(l)
-    # return l
-    print([tag.text for tag in root.iter('category')])
+    return [tag.text.translate(REPLACE_CHARS).lower() for tag in root.iter('category')]
 
 
 
