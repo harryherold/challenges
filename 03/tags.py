@@ -1,10 +1,13 @@
 import xml.etree.ElementTree as ET
 from collections import Counter
+from difflib import SequenceMatcher
+from itertools import product
 
 TOP_NUMBER = 10
 RSS_FEED = 'rss.xml'
 SIMILAR = 0.87
 REPLACE_CHARS = str.maketrans('-', ' ')
+
 
 def get_tags() -> list:
     """Find all tags in RSS_FEED.
@@ -22,8 +25,11 @@ def get_top_tags(tags):
 
 def get_similarities(tags):
     """Find set of tags pairs with similarity ratio of > SIMILAR"""
-    pass
-
+    def similar(a, b):
+        return SequenceMatcher(None, a, b).ratio()
+    l = {tuple(sorted([a, b])) for (a, b) in list(product(tags, repeat=2))
+         if a != b and similar(a, b) >= SIMILAR}
+    return l
 
 if __name__ == "__main__":
     tags = get_tags()
