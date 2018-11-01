@@ -14,8 +14,8 @@ def get_tags() -> list:
     Replace dash with whitespace."""
     tree = ET.parse('rss.xml')
     root = tree.getroot()
-    return [tag.text.translate(REPLACE_CHARS).lower() for tag in root.iter('category')]
-
+    return [tag.text.translate(REPLACE_CHARS).lower()
+            for tag in root.iter('category')]
 
 
 def get_top_tags(tags):
